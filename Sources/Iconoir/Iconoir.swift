@@ -1,6 +1,6 @@
 // Created by: Matthew Kaulfers
 // License: MIT
-// Version: 1.0.1
+// Version: 6.6.0
 #if canImport(UIKit)
 import UIKit
 

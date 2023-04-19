@@ -1,0 +1,40 @@
+# .github/workflows/release-on-merge.yml
+
+name: Create Release on PR Merge to Main
+
+on:
+  pull_request:
+    types:
+      - closed
+
+jobs:
+  create_release:
+    if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Git
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+
+      - name: Create and push new tag
+        run: |
+          git fetch --all --tags
+          git tag 6.6.0
+          git push origin 6.6.0
+
+      - name: Create new release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: 6.6.0
+          release_name: Release 6.6.0
+          body: ""
+          draft: false
+          prerelease: false
+
