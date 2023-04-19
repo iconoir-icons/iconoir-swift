@@ -1,0 +1,8 @@
+
+*.xcuserstate
+
+*.xcworkspacedata
+
+Sources/.DS_Store
+
+.DS_Store
