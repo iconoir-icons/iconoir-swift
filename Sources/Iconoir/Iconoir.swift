@@ -1,6 +1,6 @@
 // Created by: Matthew Kaulfers
 // License: MIT
-// Version: 1.0.0
+// Version: 1.0.1
 #if canImport(UIKit)
 import UIKit
 
@@ -22,4 +22,3 @@ public extension Iconoir {
     }
 }
 #endif
-
