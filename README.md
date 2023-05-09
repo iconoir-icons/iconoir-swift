@@ -1,6 +1,6 @@
 # Iconoir-swift
 
-![Version](https://img.shields.io/badge/version-1.0.1-blue) ![License](https://img.shields.io/badge/license-MIT-green)
+![Version](https://img.shields.io/badge/version-6.8.0-blue) ![License](https://img.shields.io/badge/license-MIT-green)
 
 `Iconoir-swift` is a Swift package that extends the usage of [Iconoir](https://iconoir.com) icons for your iOS, macOS, and SwiftUI projects. It provides over 1000+ unique SVG icons designed on a 24x24 pixels grid, allowing you to easily use them in your app projects.
 
