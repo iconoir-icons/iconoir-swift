@@ -1,5 +1,4 @@
-#!/opt/homebrew/bin/python3
-
+#!/bin/bash
 # Variables
 GITHUB_REPO="https://github.com/iconoir-icons/iconoir/tree/main/icons"
 ASSETS_DIR="Sources/Iconoir/Assets.xcassets"
@@ -21,17 +20,21 @@ cd .. || exit
 # Function to download and process an icon
 download_and_process_icon() {
     svg_path=$1
+    dir_name=$(basename "$(dirname "${svg_path}")")
+    if [[ "${dir_name}" == "regular" ]]; then
+      dir_name=""
+    fi
     icon_file=$(basename "${svg_path}")
     icon_name="${icon_file%.*}"
-    local_icon_path="${ASSETS_DIR}/${icon_name}.imageset"
+    local_icon_path="${ASSETS_DIR}/${icon_name}${dir_name:+-${dir_name}}.imageset"
 
-    if [[ ! -f "${local_icon_path}/${icon_name}.pdf" ]]; then
+    if [[ ! -f "${local_icon_path}/${icon_name}${dir_name:+-${dir_name}}.pdf" ]]; then
         mkdir -p "${local_icon_path}"
 
         # Copy the SVG file
-        cp "${svg_path}" "${local_icon_path}/${icon_file}"
+        cp "${svg_path}" "${local_icon_path}/${icon_name}${dir_name:+-${dir_name}}.svg"
         
-        sed -i '' -e 's/stroke="currentColor"/stroke="#000000"/g' -e 's/stroke-width="[0-9.]*"/stroke-width="1.5"/g' "${local_icon_path}/${icon_file}"
+        sed -i '' -e 's/stroke="currentColor"/stroke="#000000"/g' -e 's/stroke-width="[0-9.]*"/stroke-width="1.5"/g' "${local_icon_path}/${icon_name}${dir_name:+-${dir_name}}.svg"
 
         # Create JSON file for the icon in Assets.xcassets
         json_file="${local_icon_path}/Contents.json"
@@ -39,7 +42,7 @@ download_and_process_icon() {
 {
   "images" : [
     {
-      "filename" : "${icon_name}.svg",
+      "filename" : "${icon_name}${dir_name:+-${dir_name}}.svg",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -58,12 +61,12 @@ download_and_process_icon() {
     }
 }
 JSON
-        echo "Processed ${icon_name}"
+        echo "Processed ${icon_name}${dir_name:+-${dir_name}}"
     fi
 }
 
 # Iterate over the downloaded icons
-for svg_path in "${TEMP_DIR}/icons"/*.svg; do
+for svg_path in "${TEMP_DIR}/icons"/**/*.svg; do
     download_and_process_icon "${svg_path}"
 done
 

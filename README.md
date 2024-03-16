@@ -51,6 +51,9 @@ struct ContentView: View {
     }
 }
 ```
+### Notes
+Since Iconoir `V7.0.0`, we have introduced two styles of icons: `regular` and `solid`. To maintain consistency with previous rules, icons in the regular style continue to use the old naming convention. For example, prior to `v7.0.0`, you would use `Iconoir.plus`, and you can still do so now. On the other hand, for icons in the `solid style`, we will indicate this in the naming convention. For instance, you would use `Iconoir.plusSolid`. If an icon supports both styles, it will have two distinct names, as mentioned above: `plus` and `plusSolid`.
+
 
 ## Original Iconoir Project
 Iconoir-swift is built on top of the original [Iconoir](https://iconoir.com/) project. You can access the full library of icons, as well as additional packages and usage instructions, at the [Iconoir GitHub repository](https://github.com/iconoir-icons/iconoir#readme).
