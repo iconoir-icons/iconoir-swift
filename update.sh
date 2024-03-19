@@ -6,6 +6,10 @@ ICON_ENUM_FILE="Sources/Iconoir/Icon.swift"
 TEMP_DIR="temp_icons"
 
 # Create directories if they don't exist
+if [ -d "${ASSETS_DIR}" ]; then
+    echo "${ASSETS_DIR} exists. Clearing it..."
+    rm -rf "${ASSETS_DIR}"/*
+fi
 mkdir -p "${ASSETS_DIR}"
 mkdir -p "${TEMP_DIR}"
 
